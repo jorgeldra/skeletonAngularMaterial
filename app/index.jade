@@ -1,0 +1,63 @@
+doctype html
+html(lang='en')
+  head
+    title Angular Material - Starter App
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='description', content='')
+    meta(name='viewport', content='initial-scale=1, maximum-scale=1, user-scalable=no')
+    link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic')
+    link(rel='stylesheet', href='./bower_components/angular-material/angular-material.css')
+    link(rel='stylesheet', href='styles/app.css')
+
+    style(type='text/css').
+      /**
+      * Hide when Angular is not yet loaded and initialized
+      */
+      [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+      display: none !important;
+      }
+    script(src='./bower_components/angular/angular.js')
+    script(src='./bower_components/angular-route/angular-route.js')
+  body(ng-app='starterApp', layout='row', ng-controller='UserController as ul', ng-cloak='')
+    md-sidenav.site-sidenav.md-sidenav-left.md-whiteframe-z2(md-component-id='left', md-is-locked-open="$mdMedia('gt-sm')")
+      md-toolbar.md-whiteframe-z1
+        h1 Users
+      md-list
+        md-list-item(ng-repeat='it in ul.users')
+          md-button(ng-click='ul.selectUser(it)', ng-class="{'selected' : it === ul.selected }")
+            md-icon.avatar(md-svg-icon='{{it.avatar}}')
+            |             {{it.name}}
+    .md-whiteframe-z2(flex='', layout='column', tabindex='-1', role='main')
+      md-toolbar.md-whiteframe-z1(layout='row')
+        md-button.menu(hide-gt-sm='', ng-click='ul.toggleList()', aria-label='Show User List')
+          md-icon(md-svg-icon='menu')
+        h1 Angular Material - Starter App
+      md-content#content(flex='')
+        
+        md-button.md-ink-ripple(ng-href="#/page2") Ir a pagina 2
+        div(ng-view)
+          
+    
+    
+    script(src='./bower_components/angular-animate/angular-animate.js')
+    script(src='./bower_components/angular-aria/angular-aria.js')
+    script(type='text/javascript', src='./bower_components/angular-material/angular-material.js')
+    script(src='./scripts/main.js')
+   
+    script(type='text/javascript').
+      angular
+      .module('starterApp', ['ngMaterial', 'users'])
+      .config(function($mdThemingProvider, $mdIconProvider){
+      $mdIconProvider
+      .defaultIconSet("./images/avatars.svg", 128)
+      .icon("menu"       , "./images/menu.svg"        , 24)
+      .icon("share"      , "./images/share.svg"       , 24)
+      .icon("google_plus", "./images/google_plus.svg" , 512)
+      .icon("hangouts"   , "./images/hangouts.svg"    , 512)
+      .icon("twitter"    , "./images/twitter.svg"     , 512)
+      .icon("phone"      , "./images/phone.svg"       , 512);
+      $mdThemingProvider.theme('default')
+      .primaryPalette('brown')
+      .accentPalette('red');
+      });
